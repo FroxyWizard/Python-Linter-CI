@@ -10,40 +10,40 @@ jobs:
 
     steps:
     - name: Show runner details
-    run: |
-      echo "Runner OS:"
-      uname -a
-  
-      echo "CPU cores:"
-      nproc
-  
-      echo "CPU information:"
-      lscpu
-  
-      echo "Memory:"
-      free -h
-  
-      echo "Disk:"
-      df -h
-  
-      echo "Runner architecture:"
-      echo $RUNNER_ARCH
-  
-      echo "Runner OS variable:"
-      echo $RUNNER_OS
-  
-      echo "Runner name:"
-      echo $RUNNER_NAME
-      - name: Checkout repository
-        uses: actions/checkout@v4
+      run: |
+        echo "Runner OS:"
+        uname -a
+    
+        echo "CPU cores:"
+        nproc
+    
+        echo "CPU information:"
+        lscpu
+    
+        echo "Memory:"
+        free -h
+    
+        echo "Disk:"
+        df -h
+    
+        echo "Runner architecture:"
+        echo $RUNNER_ARCH
+    
+        echo "Runner OS variable:"
+        echo $RUNNER_OS
+    
+        echo "Runner name:"
+        echo $RUNNER_NAME
+    - name: Checkout repository
+      uses: actions/checkout@v4
 
-      - name: Set up Python
-        uses: actions/setup-python@v5
-        with:
+    - name: Set up Python
+      uses: actions/setup-python@v5
+      with:
           python-version: "3.12"
 
-      - name: Install Ruff
-        run: pip install ruff
+    - name: Install Ruff
+      run: pip install ruff
 
-      - name: Run Ruff
-        run: ruff check .
+    - name: Run Ruff
+      run: ruff check .
