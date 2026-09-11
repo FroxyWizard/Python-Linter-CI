@@ -1,6 +1,6 @@
-from datetime import datetime, timezone
 import subprocess
 import time
+from datetime import datetime, timezone
 
 SERVICE_NAME = "nginx"
 CHECK_INTERVAL = 30
