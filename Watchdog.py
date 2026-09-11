@@ -1,6 +1,6 @@
 import subprocess
 import time
-from datetime import datetime
+from datetime import datetime, timezone
 
 
 SERVICE_NAME = "nginx"
@@ -9,7 +9,7 @@ LOG_FILE = "watchdog.log"
 
 
 def log_message(message):
-    timestamp = datetime.now().strftime("%Y-%m-%d %H:%M:%S")
+    timestamp = datetime.now(timezone.utc).strftime("%Y-%m-%d %H:%M:%S")
     entry = f"{timestamp} - {message}"
 
     print(entry)
@@ -20,7 +20,8 @@ def log_message(message):
 
 def is_service_running():
     result = subprocess.run(
-        ["systemctl", "is-active", "--quiet", SERVICE_NAME]
+        ["systemctl", "is-active", "--quiet", SERVICE_NAME],
+        check=False,
     )
 
     return result.returncode == 0
@@ -30,7 +31,8 @@ def start_service():
     log_message(f"{SERVICE_NAME} is stopped. Attempting to start it.")
 
     result = subprocess.run(
-        ["sudo", "systemctl", "start", SERVICE_NAME]
+        ["sudo", "systemctl", "start", SERVICE_NAME],
+        check=False,
     )
 
     if result.returncode == 0:
